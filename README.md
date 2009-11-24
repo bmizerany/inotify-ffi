@@ -6,3 +6,6 @@ Now a gem.
 
 ## Install
 gem install inotify-ffi
+
+## Thanks
+halorgium for async_each_event
