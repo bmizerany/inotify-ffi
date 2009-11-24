@@ -38,7 +38,7 @@ module Inotify
       end
     end
 
-    def start_em(&blk)
+    def async_each_event(&blk)
       mod = Module.new do
         include Connection
         define_method(:notify_event, &blk)
