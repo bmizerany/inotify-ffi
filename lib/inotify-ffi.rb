@@ -1,5 +1,5 @@
-require 'rubygems'
 require 'ffi'
+
 module Inotify
   extend FFI::Library
 
