@@ -73,7 +73,12 @@ module Inotify
     end
 
     def inspect
-      "event.wd=#{@struct[:wd]} mask=#{@struct[:mask]} len=#{@struct[:len]} name=#{name}"
+      "<%s: wd:%s mask:%s len=%s name:%s>" % [
+        name,
+        @struct[:wd],
+        @struct[:mask],
+        @struct[:len]
+      ]
     end
 
     def mask_names
