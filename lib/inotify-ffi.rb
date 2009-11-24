@@ -38,13 +38,10 @@ module Inotify
       end
     end
 
-    def start_em(&block)
-      mod = Module.new
-      mod.instance_eval do
+    def start_em(&blk)
+      mod = Module.new do
         include Connection
-        define_method(:notify_event) do |ev|
-          block.call(ev)
-        end
+        define_method(:notify_event, &blk)
       end
       EM.watch(@io, mod) do |c|
         c.notify_readable = true
