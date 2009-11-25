@@ -24,10 +24,8 @@ module Inotify
 
     def setup
       @fd = Inotify.init
-      $stderr.puts "fd=#{@fd}"
       @wd = Inotify.add_watch(@fd, @path, @event_mask)
       @io = FFI::IO.for_fd(@fd)
-      $stderr.puts "io=#{@io}"
       self
     end
 
@@ -53,7 +51,6 @@ module Inotify
     buf = FFI::Buffer.alloc_out(EventStruct.size + 4096, 1, false)
     ev = EventStruct.new(buf)
     n = Inotify.read(fd, buf, buf.total)
-    $stderr.puts "Read #{n} bytes from inotify fd"
     Event.new(ev, buf)
   end
 
@@ -157,7 +154,7 @@ if ENV["EM"]
   end
 elsif ENV["EM2"]
   EM.run do
-    watcher.start_em do |ev|
+    watcher.async_each_event do |ev|
       puts ev.inspect
       pp ev.mask_names
     end

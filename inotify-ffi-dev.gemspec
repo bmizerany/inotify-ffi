@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.files = %w[
     README.md
-    inotify-ffi.gemspec
+    inotify-ffi-dev.gemspec
     lib/inotify-ffi.rb
   ]
 
